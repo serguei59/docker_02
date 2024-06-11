@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 
-ma_liste_integer = []
+mon_dictionnaire_de_courses = {}
 
 app = FastAPI()
 
@@ -8,17 +8,20 @@ app = FastAPI()
 def index():
     return {"bonjour, bienvenu sur l' API liste de courses"}
 
-""" @app.get("/liste")
+@app.get("/liste")
 def get_list():
-    try:
-        return {"content": ma_liste_integer}
-    except ValueError:
-        raise HTTPException(status_code=411, detail='') """
-
-""" @app.post("/liste")
-def add_to_list(element:int):
+    if len(mon_dictionnaire_de_courses)>0:
+        return {"content": len(mon_dictionnaire_de_courses)}
+    else:
+        return {"la liste est vide"}
+    
+"""   
+@app.post("/liste")
+def add_to_list(element:):
     ma_liste_integer.append(element)
     return {"content": ma_liste_integer}
+
+
 
 @app.delete("/liste") 
 def remove_from_list(element: int): 
