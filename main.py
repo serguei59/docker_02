@@ -11,7 +11,7 @@ def index():
 @app.get("/liste")
 def get_list():
     if len(mon_dictionnaire_de_courses)>0:
-        return {"content": len(mon_dictionnaire_de_courses)}
+        return {"content": mon_dictionnaire_de_courses}
     else:
         return {"la liste est vide"}
     
