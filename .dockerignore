@@ -1,0 +1,10 @@
+# ignorer le dockerfile lui meme
+Dockerfile
+
+
+# ignorer les caches
+
+
+
+# ignorer le read.me
+README.md
