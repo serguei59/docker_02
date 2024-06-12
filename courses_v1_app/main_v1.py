@@ -4,7 +4,7 @@ import uvicorn
 
 
 
-app = FastAPI()
+courses_v1_app = FastAPI()
 
 ma_liste_de_courses = [
     {"element": "farine", "quantite": 200, "unite": "grammes"},
@@ -16,20 +16,20 @@ mon_dictionnaire_de_courses = {
     "oeuf":[6,"unite"]
 }
 
-@app.get("/")
+@courses_v1_app.get("/")
 def index():
     return {"bonjour, bienvenu sur l' API liste de courses"}
 
 ###
 
-@app.get("/get_liste")
+@courses_v1_app.get("/get_liste")
 def get_list():
     if len(ma_liste_de_courses) == 0:
         return {"la liste est vide"}
     else:
         return {"content": ma_liste_de_courses}
     
-@app.get("/get_dictionnaire")
+@courses_v1_app.get("/get_dictionnaire")
 def get_dictionnaire():
     if len(mon_dictionnaire_de_courses) == 0:
         return {"le dictionnaire est vide"}
@@ -43,7 +43,7 @@ ma_liste_de_courses = [
     {"element":"oeuf","quantite":6,"unite":"unite"}
 ] """
   
-@app.post("/add_to_list")
+@courses_v1_app.post("/add_to_list")
 def add_to_list(element:str, quantite:int, unite:None|str=None):
      print(ma_liste_de_courses)
      #verififier si l élément dans la liste(est dans les cles de mon dictionnaire)
@@ -82,7 +82,7 @@ mon_dictionnaire_de_courses = {
     "oeuf":[6,"unité"]
 } """
 
-@app.post("/add_to_dictionnaire")
+@courses_v1_app.post("/add_to_dictionnaire")
 def add_to_dictionnaire(element:str, quantite:int, unite:None|str=None):
     #verififier si l élément dans le dictionnaire(est dans les cles de mon dictionnaire)
     if element in mon_dictionnaire_de_courses:
@@ -113,7 +113,7 @@ ma_liste_de_courses = [
 ]
 """
 
-@app.delete("/delete_from_liste") 
+@courses_v1_app.delete("/delete_from_liste") 
 def remove_from_list(element:str, quantite:int, unite:None|str=None): 
       #verififier si l élément dans la liste(est dans les cles de mon dictionnaire)
      ma_liste_de_comprehension = [dico["element"] for dico in ma_liste_de_courses]
@@ -157,7 +157,7 @@ mon_dictionnaire_de_courses = {
 
 #
 
-@app.delete("/delete_from_dictionnaire") 
+@courses_v1_app.delete("/delete_from_dictionnaire") 
 def remove_from_dictionnaire(element:str, quantite:int, unite:None|str=None):
     #verififier si l élément dans le dictionnaire(est dans les cles de mon dictionnaire)
     if element in mon_dictionnaire_de_courses:
@@ -181,7 +181,7 @@ def remove_from_dictionnaire(element:str, quantite:int, unite:None|str=None):
                             detail=f"{element} doesn't exist in {mon_dictionnaire_de_courses}")
    
 
-@app.delete("/clean_liste")          
+@courses_v1_app.delete("/clean_liste")          
 def clean_liste():
     try:
         ma_liste_de_courses.clear()
@@ -192,7 +192,7 @@ def clean_liste():
 
     
     
-@app.delete("/clean_dictionnaire")
+@courses_v1_app.delete("/clean_dictionnaire")
 def clean_dictionnaire():
     try:
         mon_dictionnaire_de_courses.clear()
