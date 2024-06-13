@@ -2,9 +2,9 @@ FROM python:3.12-slim
 
 WORKDIR /courses_v2_app
 
-COPY ../requirements.txt /courses_v2_app/requirements.txt
+COPY ./requirements.txt /courses_v2_app/requirements.txt
 
-RUN pip install -r ./requirements.txt
+RUN pip install -r requirements.txt
 
 COPY . /courses_v2_app
 
