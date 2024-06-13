@@ -11,3 +11,7 @@ class Product(Base):
     quantite = Column(Integer)
     unite = Column(String, default=True)
     
+
+#creer une classe Liste de courses(Products?)?
+#attribut owner element quantite fixeecomme la somme des quantites pour cet element
+# unite comme somme des unites pour cet element

@@ -12,8 +12,8 @@ class ProductCrud:
     # recuperer(lire) la liste de courses
     # il faudrait faire un grouby en rajoutant une colonne avec les count par ligne
 
-    def get_list(db: Session, skip: int = 0):
-       return db.query(models.Product).offset(skip).all()
+    def get_list(db: Session, skip: int = 0, limit: int = 100):
+       return db.query(models.Product).offset(skip).limit(limit).all()
 
     # ajouter un produit (un elt)a la liste
     def add_to_list(db: Session, new_product = schemas.ProductCreate):
@@ -24,7 +24,7 @@ class ProductCrud:
        return f"{db_product} a été ajouté à la liste de courses"
        
     #supprimer un element de la liste elelment
-    def delete_from_list(db: Session, element: str):
+    def delete_from_list(db: Session, retrievable_product: str):
     # si elt deja existant
         ##suppression de += unite
         ##suppression de += quantite
