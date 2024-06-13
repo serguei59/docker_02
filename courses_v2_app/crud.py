@@ -10,13 +10,13 @@ class ProductCrud:
 
 
     # recuperer(lire) la liste de courses
+    # il faudrait faire un grouby en rajoutant une colonne avec les count par ligne
+
     def get_list(db: Session, skip: int = 0):
        return db.query(models.Product).offset(skip).all()
 
     # ajouter un produit (un elt)a la liste
     def add_to_list(db: Session, new_product = schemas.ProductCreate):
-       # liste des produits:
-       # il faudrait faire un grouby en rajoutant une colonne avec les count par ligne
        db_product = models.Product(element=new_product.element, quantite=new_product.quantite, unite= new_product.unite)
        db.add(db_product)
        db.commit()
@@ -33,7 +33,7 @@ class ProductCrud:
         ##erreur
 
 
-    pass
+        pass
 
 
     # vider la liste
@@ -42,7 +42,7 @@ class ProductCrud:
         ##vider la liste
     # sinon
         ##raise
-    pass
+        pass
 
 
 
