@@ -3,10 +3,11 @@ from sqlalchemy.orm import relationship
 
 from .database import Base
 
-class Courses(Base):
-    __tablename__ = "courses"
+class Product(Base):
+    __tablename__ = "products"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     element = Column(String, unique=True, index=True)
-    quantite = Column(Integer)
+    quantite = Column(Integer)_
     unite = Column(String, default=True)
+    
