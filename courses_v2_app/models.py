@@ -8,6 +8,6 @@ class Product(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     element = Column(String, unique=True, index=True)
-    quantite = Column(Integer)_
+    quantite = Column(Integer)
     unite = Column(String, default=True)
     
