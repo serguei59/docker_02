@@ -9,8 +9,14 @@ class ProductBase(BaseModel):
     unite: Optional[str] = None
 
 class ProductCreate(ProductBase):
-   pass
+   element: str
+   quantite: int
+    #unite: str | None = None
+   unite: Optional[str] = None
+   
     
+class ProductDelete(ProductBase):
+    id: int
 
 class Product(ProductBase):
     id: int

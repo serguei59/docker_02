@@ -1,5 +1,5 @@
-from sqlalchemy.orm import Session 
-import models, schemas
+from sqlalchemy.orm import Session
+from . import models, schemas
 
 class ProductCrud:
 
@@ -25,8 +25,14 @@ class ProductCrud:
        db.refresh(db_product)
        return f"{db_product} a été ajouté à la liste de courses"
        
-    #supprimer un element de la liste elelment
-    def delete_from_list(db: Session, retrievable_product: str):
+    #supprimer un element de la liste element à partir de son id
+    def delete_from_list(db: Session, product_id= int):
+        db_product = db.query(models.Product).filter_by(id=product_id).first()
+        #verifier que le produit existe pour traiter sinon message d erreur=>a faire
+        db.delete(db_product)
+        db.commit()
+        return f"{db_product} a été supprimé de la liste de courses"
+
     # si elt deja existant
         ##suppression de += unite
         ##suppression de += quantite

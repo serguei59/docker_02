@@ -1,17 +1,17 @@
 from typing import List, Optional
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
+import uvicorn
 
-import models, schemas
+from . import models, schemas
 
-from database import get_db
-from crud import ProductCrud
-from database import SessionLocal, engine
+from .database import get_db, SessionLocal, engine
+from .crud import ProductCrud
 
-models.Base.metadata.create_all(bind=engine)
 
 v2_app = FastAPI()
 
+models.Base.metadata.create_all(bind=engine)
 
 # index
 @v2_app.get("/")
@@ -48,13 +48,28 @@ def add_product_to_list(product_request: schemas.ProductCreate, db: Session = De
     return ProductCrud.add_to_list(db=db, new_product = product_request)
 
 #supprimer un element de la liste elelment
+@v2_app.delete("/delete_product",tags=['Product'], response_model=schemas.Product, status_code=201)
+def remove_from_list(product_request: schemas.ProductDelete, db:Session = Depends(get_db)):
+    
+    """_summary_
 
-
+    retrait d' un produit de la liste à partie de son id
+    """
+    return ProductCrud.delete_from_list(db=db)
 
 
 # vider la liste
 
 
+#pour le executer du coup je dois le lancer 
+if __name__== "__main__":
+    uvicorn.run('courses_v2_app.main_v2:v2_app', port= 1234, reload=True)
 
     
 
+
+    
+# ceci est un module(cf __init__.py) a la racine du dossier
+#  il faut le lancer en mode module dans le terminal depuis la racine(là dou il voit la situation)
+# python3 -m courses_v2_app.main_v2
+# (relative path separation points, suppression.py)
