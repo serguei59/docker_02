@@ -1,10 +1,12 @@
 from typing import List, Optional
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
-from courses_v2_app import models, schemas
-from courses_v2_app.database import get_db
-from .crud import ProductCrud
-from .database import SessionLocal, engine
+
+import models, schemas
+
+from database import get_db
+from crud import ProductCrud
+from database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 

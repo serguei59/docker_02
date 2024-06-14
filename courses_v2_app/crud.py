@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session 
-from . import models, schemas
+import models, schemas
 
 class ProductCrud:
 
@@ -19,7 +19,7 @@ class ProductCrud:
     def add_to_list(db: Session, new_product = schemas.ProductCreate):
        db_product = models.Product(element=new_product.element, quantite=new_product.quantite, unite= new_product.unite)
        #il faut verifier l unite si le produit existe deja=> a faire
-       product = session.query(models.Product)
+       #product = session.query(models.Product).filter(.first)
        db.add(db_product)
        db.commit()
        db.refresh(db_product)
