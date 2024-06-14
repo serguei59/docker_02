@@ -4,16 +4,15 @@ from sqlalchemy.orm import Session
 from courses_v2_app import models, schemas
 from courses_v2_app.database import get_db
 from .crud import ProductCrud
+from .database import SessionLocal, engine
 
+models.Base.metadata.create_all(bind=engine)
 
-
-courses_v2_app = FastAPI()
-
-
+v2_app = FastAPI()
 
 
 # index
-@courses_v2_app.get("/")
+@v2_app.get("/")
 def v2_index():
     """_summary_
 
@@ -22,7 +21,7 @@ def v2_index():
     return ProductCrud.index()
 
 # recuperer(lire) la liste de courses
-@courses_v2_app.get("/products", tags=["Product"], response_model=List[schemas.Product])
+@v2_app.get("/products", tags=["Product"], response_model=List[schemas.Product])
 def get_products_list(element: Optional[str] = None,db: Session = Depends(get_db)):
     """_summary_
 
@@ -35,7 +34,7 @@ def get_products_list(element: Optional[str] = None,db: Session = Depends(get_db
 
     
 # ajouter un produit (un elt)a la liste
-@courses_v2_app.post("/add_product", tags=['products'], response_model=schemas.Product, status_code=201)
+@v2_app.post("/add_product", tags=['Product'], response_model=schemas.Product, status_code=201)
 def add_product_to_list(product_request: schemas.ProductCreate, db: Session = Depends(get_db)):
     """_summary_
 
@@ -44,7 +43,7 @@ def add_product_to_list(product_request: schemas.ProductCreate, db: Session = De
     # chaque nouvel elt est unique par son id mais peut etre identique par les 
     # attributs ainsi pas de traitement sur existence de product
 
-    return ProductCrud.add_to_list(db, product_request)
+    return ProductCrud.add_to_list(db=db, new_product = product_request)
 
 #supprimer un element de la liste elelment
 

@@ -8,7 +8,7 @@ class ProductCrud:
     def index():
         return {"Bienvenu(e) sur la version v2 de l'API liste de courses"}
 
-
+    
     # recuperer(lire) la liste de courses
     # il faudrait faire un grouby en rajoutant une colonne avec les count par ligne
 
@@ -18,6 +18,8 @@ class ProductCrud:
     # ajouter un produit (un elt)a la liste
     def add_to_list(db: Session, new_product = schemas.ProductCreate):
        db_product = models.Product(element=new_product.element, quantite=new_product.quantite, unite= new_product.unite)
+       #il faut verifier l unite si le produit existe deja=> a faire
+       product = session.query(models.Product)
        db.add(db_product)
        db.commit()
        db.refresh(db_product)
